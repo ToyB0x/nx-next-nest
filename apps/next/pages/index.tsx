@@ -1,8 +1,16 @@
+import {useEffect, useState} from "react";
+
 export function Index() {
-  return (
-    <div>
-    </div>
-  );
+  const [text, setText] = useState<string>("")
+
+  useEffect(() => {
+    ;(async () => {
+      const res = await fetch("/api")
+      setText(await res.text())
+    })()
+  })
+
+  return <div>{text}</div>
 }
 
 export default Index;
