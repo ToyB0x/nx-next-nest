@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 
 export function Index() {
-  const [text, setText] = useState<string>('')
+  const [text, setText] = useState<string>('initialText')
 
   useEffect(() => {
     ;(async () => {
@@ -12,7 +12,7 @@ export function Index() {
         setText(e.message)
       }
     })()
-  })
+  }, [])
 
   return <div>{text}</div>
 }
