@@ -7,7 +7,11 @@ export function Index() {
     ;(async () => {
       try {
         const res = await fetch('/api')
-        setText(await res.text())
+        if (res.status !== 404) {
+          setText(await res.text())
+        } else {
+          setText('404')
+        }
       } catch (e) {
         setText('api error')
       }
