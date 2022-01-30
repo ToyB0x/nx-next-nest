@@ -9,7 +9,7 @@ export function Index() {
         const res = await fetch('/api')
         setText(await res.text())
       } catch (e) {
-        setText(e.message)
+        setText('api error')
       }
     })()
   }, [])
