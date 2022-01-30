@@ -5,8 +5,12 @@ export function Index() {
 
   useEffect(() => {
     ;(async () => {
-      const res = await fetch('/api')
-      setText(await res.text())
+      try {
+        const res = await fetch('/api')
+        setText(await res.text())
+      } catch (e) {
+        setText(e.message)
+      }
     })()
   })
 
