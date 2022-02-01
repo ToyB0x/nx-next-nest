@@ -6,7 +6,7 @@
     "start": "nx serve",
     "build:next": "nx build",
     "build:nest": "nx build nest",
-    "deploy:nest": "cd dist/apps/nest && gcloud app deploy",
+    "deploy:nest": "yarn build:nest && cd dist/apps/nest && gcloud app deploy",
     "test": "nx test",
     "lint": "nx run-many --target=lint --all",
     "lint:fix": "nx run-many --target=lint:fix --all",
