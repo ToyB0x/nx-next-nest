@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react'
 
 const apiURL =
-  process.env.NODE_ENV === 'production'
-    ? 'https://nx-next-nest-prisma.an.r.appspot.com/api'
-    : '/api'
+  process.env.NODE_ENV === 'development'
+    ? '/api'
+    : 'https://nx-next-nest-prisma.an.r.appspot.com/api'
 
 export function Index() {
   const [text, setText] = useState<string>('initialText')

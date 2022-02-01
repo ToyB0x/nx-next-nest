@@ -10,9 +10,10 @@ import { AppModule } from './app/app.module'
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule)
+  const vercelOrigins = new RegExp('https://(.+\\.)?vercel.app', 'i')
   app.enableCors({
     // TODO: allow only prd origin
-    origin: ['https://(.+\\.)?vercel.app'],
+    origin: [vercelOrigins],
     allowedHeaders: 'Origin, X-Requested-With, Content-Type, Accept',
   })
 
