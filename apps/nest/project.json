@@ -10,7 +10,14 @@
         "outputPath": "dist/apps/nest",
         "main": "apps/nest/src/main.ts",
         "tsConfig": "apps/nest/tsconfig.app.json",
-        "assets": ["apps/nest/src/assets"]
+        "assets": ["apps/nest/src/assets",
+          {
+          "input": "apps/nest",
+          "glob": "app.yaml",
+          "output": "."
+          }
+        ],
+        "generatePackageJson": true
       },
       "configurations": {
         "production": {
