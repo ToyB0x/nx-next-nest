@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 
 const apiURL =
   process.env.NODE_ENV === 'development'
@@ -6,24 +6,37 @@ const apiURL =
     : 'https://nx-next-nest-prisma.an.r.appspot.com/api'
 
 export function Index() {
-  const [text, setText] = useState<string>('initialText')
+  const [input, setInput] = useState('')
+  const [src, setSrc] = useState(null)
 
-  useEffect(() => {
-    ;(async () => {
-      try {
-        const res = await fetch(apiURL)
-        if (res.status !== 404) {
-          setText(await res.text())
-        } else {
-          setText('404')
-        }
-      } catch (e) {
-        setText('api error')
-      }
-    })()
-  }, [])
+  const handleChange = (e) => setInput(e.target.value)
 
-  return <div>{text}</div>
+  const onClick = async () => {
+    const res = await fetch(
+      apiURL + '/screenshot' + '?url=' + decodeURIComponent(input)
+    )
+    const image = 'data:image/png;base64,' + (await res.text())
+    setSrc(image)
+  }
+
+  return (
+    <div>
+      <form>
+        <label>
+          <input
+            type='text'
+            placeholder='URL'
+            value={input}
+            onChange={handleChange}
+          />
+        </label>
+        <button type='button' onClick={onClick}>
+          Get Screenshot
+        </button>
+      </form>
+      {src && <img src={src} />}
+    </div>
+  )
 }
 
 export default Index

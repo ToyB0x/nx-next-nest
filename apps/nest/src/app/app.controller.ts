@@ -1,6 +1,6 @@
-import { Controller, Get } from '@nestjs/common'
+import { Controller, Get, Query } from '@nestjs/common'
 
-import { AppService } from './app.service'
+import { AppService, ScreenshotAppService } from './app.service'
 
 @Controller()
 export class AppController {
@@ -9,5 +9,16 @@ export class AppController {
   @Get()
   getData() {
     return this.appService.getData()
+  }
+}
+
+@Controller('screenshot')
+export class ScreenshotController {
+  constructor(private readonly appService: ScreenshotAppService) {}
+
+  @Get()
+  getData(@Query() query) {
+    const { url } = query
+    return this.appService.getData(url)
   }
 }
