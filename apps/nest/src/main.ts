@@ -10,6 +10,12 @@ import { AppModule } from './app/app.module'
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule)
+  app.enableCors({
+    // TODO: allow only prd origin
+    origin: ['https://(.+\\.)?vercel.app'],
+    allowedHeaders: 'Origin, X-Requested-With, Content-Type, Accept',
+  })
+
   const globalPrefix = 'api'
   app.setGlobalPrefix(globalPrefix)
   const port = process.env.PORT || 3333

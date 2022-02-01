@@ -3,9 +3,11 @@
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
-    "start": "nx serve",
+    "dev:next": "nx serve",
+    "dev:nest": "nx serve",
     "build:next": "nx build",
     "build:nest": "nx build nest",
+    "start:next": "yarn next start ./dist/apps/next",
     "deploy:nest": "yarn build:nest && cd dist/apps/nest && gcloud app deploy",
     "test": "nx test",
     "lint": "nx run-many --target=lint --all",
