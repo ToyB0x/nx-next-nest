@@ -1,3 +1,5 @@
+import { Box, ChakraProvider, Flex, Spacer } from '@chakra-ui/react'
+
 import Link from 'next/link'
 const apiURL =
   process.env.NODE_ENV === 'development'
@@ -6,17 +8,21 @@ const apiURL =
 
 export function Index() {
   return (
-    <div>
-      <Link href='/next'>
-        <a>1. Next</a>
-      </Link>
-
-      <br />
-
-      <Link href='/nest'>
-        <a>2. Nest</a>
-      </Link>
-    </div>
+    <ChakraProvider>
+      <Flex>
+        <Box>
+          <Link href='/next'>
+            <a>1. Next</a>
+          </Link>
+        </Box>
+        <Spacer />
+        <Box>
+          <Link href='/nest'>
+            <a>2. Nest</a>
+          </Link>
+        </Box>
+      </Flex>
+    </ChakraProvider>
   )
 }
 
