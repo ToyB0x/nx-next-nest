@@ -1,40 +1,21 @@
-import { useState } from 'react'
-
+import Link from 'next/link'
 const apiURL =
   process.env.NODE_ENV === 'development'
     ? '/api'
     : 'https://nx-next-nest-prisma.an.r.appspot.com/api'
 
 export function Index() {
-  const [input, setInput] = useState('')
-  const [src, setSrc] = useState(null)
-
-  const handleChange = (e) => setInput(e.target.value)
-
-  const onClick = async () => {
-    const res = await fetch(
-      apiURL + '/screenshot' + '?url=' + decodeURIComponent(input)
-    )
-    const image = 'data:image/png;base64,' + (await res.text())
-    setSrc(image)
-  }
-
   return (
     <div>
-      <form>
-        <label>
-          <input
-            type='text'
-            placeholder='URL'
-            value={input}
-            onChange={handleChange}
-          />
-        </label>
-        <button type='button' onClick={onClick}>
-          Get Screenshot
-        </button>
-      </form>
-      {src && <img src={src} />}
+      <Link href='/next'>
+        <a>1. Next</a>
+      </Link>
+
+      <br />
+
+      <Link href='/nest'>
+        <a>2. Nest</a>
+      </Link>
     </div>
   )
 }
