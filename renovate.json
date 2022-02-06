@@ -1,5 +1,5 @@
 {
-  "extends": [
-    "config:base"
-  ]
+  "schedule": "every weekend",
+  "extends": ["config:base", "group:allNonMajor", ":semanticCommits"],
+  "reviewers": ["toaru"]
 }
