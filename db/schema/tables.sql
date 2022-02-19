@@ -39,3 +39,29 @@ CREATE TABLE IF NOT EXISTS "setting"
   PRIMARY KEY (user_id),
   FOREIGN KEY (user_id) references "user"(id)
 );
+
+CREATE FUNCTION set_created_at() RETURNS TRIGGER AS '
+  begin
+    new.created_at := ''now'';
+    return new;
+  end;
+' LANGUAGE plpgsql;
+
+CREATE FUNCTION set_update_at() RETURNS TRIGGER AS '
+  begin
+    new.updated_at := ''now'';
+    return new;
+  end;
+' LANGUAGE plpgsql;
+
+CREATE TRIGGER created_at BEFORE INSERT ON public.user     FOR EACH ROW EXECUTE PROCEDURE set_created_at();
+CREATE TRIGGER created_at BEFORE INSERT ON public.follow   FOR EACH ROW EXECUTE PROCEDURE set_created_at();
+CREATE TRIGGER created_at BEFORE INSERT ON public.bookmark FOR EACH ROW EXECUTE PROCEDURE set_created_at();
+CREATE TRIGGER created_at BEFORE INSERT ON public.setting  FOR EACH ROW EXECUTE PROCEDURE set_created_at();
+CREATE TRIGGER created_at_update_at BEFORE INSERT ON public.user     FOR EACH ROW EXECUTE PROCEDURE set_update_at();
+CREATE TRIGGER created_at_update_at BEFORE INSERT ON public.follow   FOR EACH ROW EXECUTE PROCEDURE set_update_at();
+CREATE TRIGGER created_at_update_at BEFORE INSERT ON public.bookmark FOR EACH ROW EXECUTE PROCEDURE set_update_at();
+CREATE TRIGGER created_at_update_at BEFORE INSERT ON public.setting  FOR EACH ROW EXECUTE PROCEDURE set_update_at();
+CREATE TRIGGER update_at  BEFORE UPDATE ON public.user     FOR EACH ROW EXECUTE PROCEDURE set_update_at();
+CREATE TRIGGER update_at  BEFORE UPDATE ON public.bookmark FOR EACH ROW EXECUTE PROCEDURE set_update_at();
+CREATE TRIGGER update_at  BEFORE UPDATE ON public.setting  FOR EACH ROW EXECUTE PROCEDURE set_update_at();
