@@ -11,7 +11,7 @@ services:
       POSTGRES_DB: ${POSTGRES_DB_NAME}
 
   graphql-engine:
-    image: hasura/graphql-engine:v2.3.1
+    image: hasura/graphql-engine:v2.4.0
     ports:
       - "8080:8080"
     depends_on:
